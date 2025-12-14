@@ -14,17 +14,19 @@ function updateValues() {
   const incomeTotal = amounts.filter(a => a > 0).reduce((acc, item) => acc + item, 0).toFixed(2);
   const expenseTotal = (amounts.filter(a => a < 0).reduce((acc, item) => acc + item, 0) * -1).toFixed(2);
 
-  balance.textContent = `$${total}`;
-  income.textContent = `$${incomeTotal}`;
-  expense.textContent = `$${expenseTotal}`;
+  // Updated currency symbols here
+  balance.textContent = `₹${total}`;
+  income.textContent = `₹${incomeTotal}`;
+  expense.textContent = `₹${expenseTotal}`;
 }
 
 function addTransactionDOM(transaction) {
   const tr = document.createElement('tr');
+  // Updated currency symbol in the table row
   tr.innerHTML = `
     <td>${transaction.date}</td>
     <td>${transaction.text}</td>
-    <td class="amount ${transaction.amount < 0 ? 'expense' : ''}">$${transaction.amount.toFixed(2)}</td>
+    <td class="amount ${transaction.amount < 0 ? 'expense' : ''}">₹${transaction.amount.toFixed(2)}</td>
     <td><button onclick="removeTransaction(${transaction.id})">X</button></td>
   `;
   list.appendChild(tr);
